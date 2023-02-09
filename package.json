@@ -5,12 +5,13 @@
   "main": "src/index.js",
   "scripts": {
     "cy:open": "cypress open --config baseUrl='http://localhost:3000'",
-    "cy:run": "cypress run",
+    "cy:run": "cypress run --config baseUrl='http://localhost:3000'",
     "cy:start-server-and-test": "start-server-and-test serve :3000",
     "semantic-release": "semantic-release",
     "serve": "serve public",
     "test": "cy:open :3000",
     "test:e2e": "start-server-and-test serve 3000 cy:open",
+    "test:e2e-headless": "start-server-and-test serve 3000 cy:run",
     "typescript": "tsc --project ./tsconfig.json"
   },
   "keywords": [],
