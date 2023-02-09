@@ -1,5 +1,11 @@
 name: Publish plugin to npm
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   Test:
     runs-on: ubuntu-latest
