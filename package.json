@@ -2,7 +2,11 @@
   "name": "cypress-mock-websocket-plugin",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/commands.js",
+  "files": [
+    "index.d.ts",
+    "src/commands.js"
+  ],
   "scripts": {
     "cy:open": "cypress open --config baseUrl='http://localhost:3000'",
     "cy:run": "cypress run --config baseUrl='http://localhost:3000'",
@@ -16,7 +20,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "types": "index.d.ts",
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.2",
