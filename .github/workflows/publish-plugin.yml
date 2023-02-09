@@ -5,6 +5,7 @@ on:
 
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   Test:
@@ -16,5 +17,6 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
+      - run: npm run typescript
       - run: npm run test:e2e-headless
       - run: npm run semantic-release
