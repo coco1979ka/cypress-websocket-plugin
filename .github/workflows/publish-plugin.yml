@@ -3,14 +3,11 @@ on: [push, pull_request]
 jobs:
   Test:
     runs-on: ubuntu-latest
+    container:
+      image: node:18
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - run: npm ci
       - run: npm run test:e2e-headless
-  Release:
-    runs-on: ubuntu-latest
-    container:
-      image: node:18
-    steps:
       - run: npm run semantic-release
