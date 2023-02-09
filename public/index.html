@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <title>Cypress Websocket Plugin</title>
+
+</head>
+<body>
+    <h1>Cypress Websocket Plugin</h1>
+    <button id="subscribe" onclick="sendRequest()">Subscribe</button>
+    <pre id="output"></pre>
+    <script src="https://unpkg.com/rxjs@7.5.7/dist/bundles/rxjs.umd.js"></script>
+    <script>
+        const { webSocket } = rxjs
+
+        const ws$ = webSocket.webSocket({
+            url: "ws://cypress-websocket/ws",
+            WebSocketCtor: window.MockedWebSocket,
+        })
+        ws$.subscribe((m) => document.getElementById('output').innerText = m.payload)
+
+        const sendRequest = () => {
+            ws$.next({
+                type: 'request',
+                payload: 'PING'
+            })
+        }
+    </script>
+</body>
+</html>
