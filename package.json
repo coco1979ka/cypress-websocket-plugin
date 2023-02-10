@@ -19,7 +19,7 @@
     "typescript": "tsc --project ./tsconfig.json"
   },
   "keywords": [],
-  "author": "",
+  "author": "Christian Metzler",
   "license": "MIT",
   "types": "index.d.ts",
   "devDependencies": {
@@ -37,5 +37,10 @@
   "dependencies": {
     "mock-socket": "^9.1.5",
     "ts-pattern": "^4.1.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coco1979ka/cypress-websocket-plugin.git"
+  },
+  "homepage": "https://github.com/coco1979ka/cypress-websocket-plugin#readme"
 }
