@@ -81,6 +81,8 @@ Cypress.Commands.add('mockWebSocket', (url: string, connectionResponseMessage?: 
   cy.on('test:after:run', () => {
     console.log("Mock Socket: Stopping Mock Server")
     mockServer.close()
+    requestResponses = []
+    requestHandlers = []
   })
 })
 
