@@ -30,6 +30,13 @@ It's required that you can bypass the default web socket constructor.
 
 ### Setup
 
+Import this plugin by adding it to the `commands.ts` file:
+
+```typescript
+// cypress/support/commands.ts
+import 'cypress-mock-websocket-plugin';
+```
+
 Here's an example how it will work with rxjs:
 
 ```typescript
