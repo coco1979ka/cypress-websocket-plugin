@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <title>Cypress Websocket Plugin</title>
+
+</head>
+<body>
+<h1>Cypress Websocket Plugin</h1>
+<button id="subscribe" onclick="sendRequest()">Subscribe</button>
+<pre id="output"></pre>
+<script>
+    const websocket = new WebSocket('ws://cypress-websocket/ws');
+
+    websocket.onopen = function (event) {
+        console.log('Connected to server.', event);
+    };
+
+    websocket.onmessage = function (event) {
+        console.log('Message from server ', event.data);
+        document.getElementById('output').innerHTML = event.data;
+    };
+
+    websocket.onerror = function (event) {
+        console.log('Error ', event);
+    };
+
+    websocket.onclose = function (event) {
+        console.log('Connection closed ', event);
+    };
+
+    function sendRequest() {
+        websocket.send(JSON.stringify({
+            type: 'request',
+            payload: 'PING'
+        }));
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -7,6 +7,11 @@ interface RequestResponse {
   response: WebSocketMessage
 }
 
+const defaultOptions: MockWebSocketOptions = {
+  useDefaultWebSocket: false,
+  webSocketCtorName: "MockedWebSocket"
+}
+
 let socketPromise: Promise<Client> = null
 let mockServer = null
 let requestResponses: RequestResponse[] = []
@@ -39,7 +44,7 @@ const getServer = (url: string, connectionResponseData?: WebSocketMessage): Prom
       mockServer.close()
     }
 
-    mockServer = new Server(url, {mock: false})
+    mockServer = new Server(url, {mock: true})
     mockServer.on('connection', (socket) => {
       console.log('Connected')
       if (connectionResponseData) {
@@ -68,13 +73,17 @@ const getServer = (url: string, connectionResponseData?: WebSocketMessage): Prom
   })
 }
 
-
-Cypress.Commands.add('mockWebSocket', (url: string, connectionResponseMessage?: WebSocketMessage) => {
+Cypress.Commands.add('mockWebSocket', (url: string, options: MockWebSocketOptions = defaultOptions) => {
   cy.log("Mock Socket: Mocking WebSocket")
 
   cy.on('window:before:load', win => {
-    //@ts-ignore
-    win.MockedWebSocket = WebSocket
+    const { connectionResponseMessage, useDefaultWebSocket, webSocketCtorName } = options
+    console.log("Mock Socket: Mocking WebSocket", webSocketCtorName)
+    if (!useDefaultWebSocket) {
+      win[webSocketCtorName] = WebSocket
+    } else {
+      win.WebSocket = WebSocket
+    }
     socketPromise = getServer(url, connectionResponseMessage)
   })
 
