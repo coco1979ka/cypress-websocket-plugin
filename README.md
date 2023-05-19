@@ -26,7 +26,8 @@ cy.mockWebSocket('ws://cypress-websocket/ws')
 ## Usage
 
 The plugin is known to work with rxjs web sockets and GraphQL Apollo client. 
-It's required that you can bypass the default web socket constructor.
+It's **recommended** that you can bypass the default web socket constructor, but you can 
+also use the browser's native web socket implementation (see below).
 
 ### Setup
 
@@ -59,6 +60,39 @@ In your Cypress tests, mock the web socket **before** you call visit:
 ```typescript
 cy.mockWebSocket('ws://cypress-websocket/ws')
   .visit('/')
+```
+
+### Changing the default web socket constructor
+If for some reasons you want to use a different WebSocketCtor name than the default `window.MockedWebSocket` from
+the example, you can now change the name of the constructor:
+
+```typescript
+cy.mockWebSocket('ws://cypress-websocket/ws', { webSocketCtorName: 'MyWebSocket' })
+```
+
+### Native Web Socket API
+It's now possible to use the browser's native WebSocket API. Because Cypress uses WebSockets for internal
+communication, you have to explicitly turn on the option for native web sockets:
+
+```typescript
+cy.mockWebSocket('ws://cypress-websocket/ws', { useNative: true })
+```
+
+### Initial response
+
+---
+**⚠️ BREAKING CHANGE**
+
+The initial response must be moved to the options object.
+
+---
+
+
+If you need to mock an initial response, you can do it like this:
+
+```typescript
+const initialResponse = { type: 'response', payload: 'INITIAL' }
+cy.mockWebSocket('ws://cypress-websocket/ws', { connectionResponseMessage: initialResponse })
 ```
 
 ### Mocking interactions (request/response style)
