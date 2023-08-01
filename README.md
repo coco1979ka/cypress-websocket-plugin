@@ -75,7 +75,7 @@ It's now possible to use the browser's native WebSocket API. Because Cypress use
 communication, you have to explicitly turn on the option for native web sockets:
 
 ```typescript
-cy.mockWebSocket('ws://cypress-websocket/ws', { useNative: true })
+cy.mockWebSocket('ws://cypress-websocket/ws', { useDefaultWebSocket: true })
 ```
 
 ### Initial response
