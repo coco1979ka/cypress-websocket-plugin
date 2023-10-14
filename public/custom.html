@@ -15,7 +15,7 @@
             url: "ws://cypress-websocket/ws",
             WebSocketCtor: window.MockedWebSocket,
         })
-        ws$.subscribe((m) => document.getElementById('output').innerText = m.payload)
+        ws$.subscribe((m) => document.getElementById('output').innerText += m.payload)
 
         const sendRequest = () => {
             ws$.next({

@@ -16,7 +16,7 @@
 
     websocket.onmessage = function (event) {
         console.log('Message from server ', event.data);
-        document.getElementById('output').innerHTML = event.data;
+        document.getElementById('output').innerHTML += event.data;
     };
 
     websocket.onerror = function (event) {
@@ -33,7 +33,6 @@
             payload: 'PING'
         }));
     }
-
 
 </script>
 

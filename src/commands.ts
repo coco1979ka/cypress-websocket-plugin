@@ -57,14 +57,12 @@ const getServer = (url: string, connectionResponseData?: WebSocketMessage): Prom
           console.log('got response from handler', response)
           if(response) {
             sendMessage(socket, response)
-            break
           }
         }
 
         for(const requestResponse of requestResponses) {
           if (matches(requestResponse.request, message)) {
             sendMessage(socket, requestResponse.response)
-            break
           }
         }
       })
