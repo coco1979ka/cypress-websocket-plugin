@@ -1,11 +1,18 @@
-describe('Test lazy evaluation', () => {
+/// <reference types="cypress" />
+/// <reference types="../../index.d.ts" />
 
+describe('Test lazy evaluation', () => {
   it('should evaluate lazily', () => {
-    const context = 'My Context'
-    cy.mockWebSocket('ws://cypress-websocket/ws', { webSocketCtorName: 'MockedWebSocket' })
+    const context = 'My Context';
+    cy.mockWebSocket('ws://cypress-websocket/ws', {
+      webSocketCtorName: 'MockedWebSocket',
+    })
       .visit('/custom')
       .contains('Cypress Websocket Plugin')
-      .triggerSocketEvent(() => { return { type: 'event', payload: context }})
-      .get('pre').contains(context)
-  })
-})
+      .triggerSocketEvent(() => {
+        return { type: 'event', payload: context };
+      })
+      .get('pre')
+      .contains(context);
+  });
+});
